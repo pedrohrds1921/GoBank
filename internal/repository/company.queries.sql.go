@@ -8,6 +8,7 @@ package repository
 import (
 	"context"
 
+	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
@@ -56,7 +57,7 @@ const deleteCompanyAccount = `-- name: DeleteCompanyAccount :exec
 DELETE FROM company WHERE id = $1
 `
 
-func (q *Queries) DeleteCompanyAccount(ctx context.Context, id int32) error {
+func (q *Queries) DeleteCompanyAccount(ctx context.Context, id uuid.UUID) error {
 	_, err := q.db.Exec(ctx, deleteCompanyAccount, id)
 	return err
 }
@@ -65,7 +66,7 @@ const getCompanyAcountById = `-- name: GetCompanyAcountById :one
 SELECT id, annual_revenue, years_in_business, trade_name, phone, corporate_email, category, balance FROM company WHERE id = $1
 `
 
-func (q *Queries) GetCompanyAcountById(ctx context.Context, id int32) (Company, error) {
+func (q *Queries) GetCompanyAcountById(ctx context.Context, id uuid.UUID) (Company, error) {
 	row := q.db.QueryRow(ctx, getCompanyAcountById, id)
 	var i Company
 	err := row.Scan(
@@ -87,7 +88,7 @@ UPDATE company SET balance = $1 WHERE id = $2
 
 type UpdateCompanyBalanceParams struct {
 	Balance pgtype.Numeric `json:"balance"`
-	ID      int32          `json:"id"`
+	ID      uuid.UUID      `json:"id"`
 }
 
 func (q *Queries) UpdateCompanyBalance(ctx context.Context, arg UpdateCompanyBalanceParams) error {

@@ -1,6 +1,6 @@
 -- Write your migrate up statements here
 CREATE TABLE IF NOT EXISTS company (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(), 
     annual_revenue DECIMAL(15,2) NOT NULL,
     years_in_business INT NOT NULL,
     trade_name VARCHAR(255) NOT NULL,

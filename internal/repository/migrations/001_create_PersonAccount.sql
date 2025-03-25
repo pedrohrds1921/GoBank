@@ -1,6 +1,6 @@
 -- Write your migrate up statements here
 CREATE TABLE IF NOT EXISTS person (
-    id UUID PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
+   id UUID PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(), 
     monthly_income DECIMAL(10,2) NOT NULL,
     age INT NOT NULL,
     full_name VARCHAR(255) NOT NULL,

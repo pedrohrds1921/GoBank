@@ -10,7 +10,7 @@ import (
 )
 
 type Company struct {
-	ID              int32          `json:"id"`
+	ID              uuid.UUID      `json:"id"`
 	AnnualRevenue   pgtype.Numeric `json:"annual_revenue"`
 	YearsInBusiness int32          `json:"years_in_business"`
 	TradeName       string         `json:"trade_name"`
